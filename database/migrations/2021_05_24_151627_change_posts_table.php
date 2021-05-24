@@ -14,8 +14,8 @@ class ChangePostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
-            $table->string('author', 100);
         });
     }
 
