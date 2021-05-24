@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    public $timestamps = false;
     public function post() {
-        return $this->hasOne('App/Post');
+        return $this->BelongsTo('App/Post');
     }
 }
