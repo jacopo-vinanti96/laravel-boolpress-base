@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Post;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 class PostsTableSeeder extends Seeder
 {
@@ -15,8 +16,8 @@ class PostsTableSeeder extends Seeder
     {
         for ( $i = 0; $i < 7; $i++ ) {
             $newpost = new Post();
-            $newpost->slug = $faker-> words(5, true);
             $newpost->title = $faker-> sentence();
+            $newpost->slug = Str::slug( $newpost->title, '-' );
             $newpost->content = $faker-> paragraphs(4, true);
             $newpost->image = $faker-> imageUrl(640, 480, 'animals', true);
             $newpost->date = $faker-> date();
