@@ -8,6 +8,9 @@ class Post extends Model
 {
     public $timestamps = false;
     public function comments() {
-        return $this->hasMany('App/Comment');
+        return $this->hasMany('App\Comment');
+    }
+    public function tags() {
+        return $this->belongsToMany('App\Tag');
     }
 }
