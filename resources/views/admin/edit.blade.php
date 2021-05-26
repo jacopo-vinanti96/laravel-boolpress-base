@@ -35,9 +35,17 @@
 @endsection
 
 @section('postTags')
-    <div class="form-group">
+    <div class="form-check">
         @foreach ( $tags as $tag )
-            <input type="checkbox" name="tags[]" id="{{ $tag->name }}" value="{{ $tag->id }}"> {{ $tag->name }}
+        <input type="checkbox" name="tags[]" id="{{ $tag->name }}" value="{{ $tag->id }}" {{ $post->tags->contains( $tag )? 'checked' : '' }}>
+        <label for="{{ $tag->name }}">{{ $tag->name }}</label>
         @endforeach
+    </div>
+@endsection
+
+@section('postPublic')
+    <div class="form-check">
+        <input type="checkbox" name="public" id="public" value="1" {{ $post->public == true? 'checked' : '' }}>
+        <label for="public">Public</label>
     </div>
 @endsection

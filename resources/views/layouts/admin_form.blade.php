@@ -38,7 +38,10 @@
             <label for="image">Image</label>
             <input type="numeric" name="image" id="image" placeholder="Image URL" @yield('postImage')>
         </div>
+        
         @yield('postTags')
+
+        @yield('postPublic')
 
         <input class=".btn btn-primary" type="submit" value="Send">
     </form>
