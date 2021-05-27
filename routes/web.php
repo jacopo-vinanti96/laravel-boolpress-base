@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::namespace('Guest')->group(function () {
+    Route::get('/', 'BlogController@index')->name('guest.posts.index');
+    Route::get('/posts-filter/{slug}', 'BlogController@filter_tag')->name('guest.posts.filter_tag');
 });
 
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
