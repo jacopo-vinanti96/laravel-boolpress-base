@@ -18,7 +18,7 @@ class PostController extends Controller
             'image' => 'nullable | url',
             'author' => 'required | string',
             'content' => 'required | string',
-            'date' => 'required | string'
+            'date' => 'required | date_format:Y-m-d'
         ];
     } 
 
@@ -40,7 +40,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $tags = Tag::all();
+        return view('admin.create', compact('tags'));
     }
 
     /**
@@ -49,9 +50,20 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( Request $request )
     {
-        //
+        $request->validate( $this->validateFields );
+        $data = $request->all();
+
+        $data['public'] = !isset( $data['public'] ) ? 0 : 1;
+
+        $data['slug'] = Str::slug ($data['title'], '-' );
+
+        $newpost = Post::create( $data );
+
+        $newpost->tags()->attach( $data['tags'] );
+
+        return redirect()->route( 'admin.posts.show', [ 'post' => $newpost ] );
     }
 
     /**

@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="date">Date</label>
-            <input type="numeric" name="date" id="date" placeholder="YYYY minimum: 1900" @yield('postDate')>
+            <input type="numeric" name="date" id="date" placeholder="Date: Year-Month-Day" @yield('postDate')>
         </div>
         <div class="form-group">
             <label for="content">Content</label>
