@@ -38,4 +38,22 @@
             <img src="{{ $post['image'] }}" alt="post image">
         </li>
     </ul>
+    <ul>
+        @if ( count($post->comments) !== 0 )
+            <h3>Comments</h3>
+            <ul>
+                @foreach ( $post->comments as $comment )
+                <li>
+                    <a href="#">{{ $comment->author }}</a>
+                    <p>{{ $comment->content }}</p>
+                    <form action="{{route('admin.comments.destroy', [ $comment->id ])}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </li>
+                @endforeach
+            </ul>
+        @endif
+    </ul>
 @endsection
