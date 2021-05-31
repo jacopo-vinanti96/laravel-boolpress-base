@@ -7,6 +7,8 @@ use App\Post;
 use App\Tag;
 use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CommentMail;
 
 class BlogController extends Controller
 {
@@ -42,6 +44,8 @@ class BlogController extends Controller
         $newComment->post_id = $post->id;
 
         $newComment->save();
+
+        Mail::to('pippo@gmail.com')->send(new CommentMail($post));
 
         return back();
     }
