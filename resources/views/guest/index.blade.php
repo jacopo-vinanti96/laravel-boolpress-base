@@ -16,7 +16,7 @@
         <li>
             Date: {{ $post['date'] }}
         </li>
-        <a href="{{ route('guest.posts.show', [ $post->id ]) }}">Post details</a>
+        <a href="{{ route('guest.posts.show_post', [ $post->slug ]) }}">Post details</a>
     </ul>
     @endforeach
 @endsection
