@@ -30,10 +30,6 @@
     {{ old('content') }}
 @endsection
 
-@section('postImage')
-    value="{{ old('image') }}"
-@endsection
-
 @section('postTags')
     <div class="form-check">
         @foreach ( $tags as $tag )

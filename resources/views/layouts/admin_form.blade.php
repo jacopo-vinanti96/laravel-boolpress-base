@@ -15,7 +15,7 @@
         </div>
     @endif
     @yield('title')
-    <form action=@yield('formAction') method=@yield('formMethod')>
+    <form action=@yield('formAction') method=@yield('formMethod') enctype="multipart/form-data">
         @csrf
         @yield('method')
         <div class="form-group">
@@ -36,7 +36,7 @@
         </div>
         <div class="form-group">
             <label for="image">Image</label>
-            <input type="numeric" name="image" id="image" placeholder="Image URL" @yield('postImage')>
+            <input type="file" id="image" name="image">
         </div>
         
         @yield('postTags')

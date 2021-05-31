@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Tag;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -15,7 +16,7 @@ class PostController extends Controller
     public function __construct() {
         $this->validateFields = [
             'title' => 'required | string | unique:posts',
-            'image' => 'nullable | url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'author' => 'required | string',
             'content' => 'required | string',
             'date' => 'required | date_format:Y-m-d'
@@ -55,13 +56,19 @@ class PostController extends Controller
         $request->validate( $this->validateFields );
         $data = $request->all();
 
+        if ( isset($data['image']) ) {
+            $data['image'] = Storage::disk('public')->put('images', $data['image']);
+        }
+
         $data['public'] = !isset( $data['public'] ) ? 0 : 1;
 
         $data['slug'] = Str::slug ($data['title'], '-' );
 
         $newpost = Post::create( $data );
 
-        $newpost->tags()->attach( $data['tags'] );
+        if ( isset($data['tags']) ) {
+            $newpost->tags()->attach( $data['tags'] );
+        }
 
         return redirect()->route( 'admin.posts.show', [ 'post' => $newpost ] );
     }
