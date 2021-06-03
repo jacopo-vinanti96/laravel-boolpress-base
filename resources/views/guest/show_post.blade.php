@@ -12,7 +12,7 @@
         @foreach ($post->tags as $tag)
             <a href="#">{{ $tag->name }}</a>    
         @endforeach
-        <img class="d-block" src="{{ $post['image'] }}" alt="post image">
+        <img class="d-block" src="{{ asset('storage/' . $post->image) }}" alt="post image">
         <p>{{ $post['content'] }}</p>
         Date: {{ $post['date'] }}
         @if ( count($post->comments) !== 0 )

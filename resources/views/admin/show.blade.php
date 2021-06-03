@@ -35,7 +35,7 @@
         </li>
         <li>
             Image: 
-            <img src="{{ $post['image'] }}" alt="post image">
+            <img src="{{ asset('storage/' . $post->image) }}" alt="post image">
         </li>
     </ul>
     <ul>

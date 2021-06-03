@@ -112,6 +112,10 @@ class PostController extends Controller
 
         $data = $request->all();
 
+        if ( isset($data['image']) ) {
+            $data['image'] = Storage::disk('public')->put('images', $data['image']);
+        }
+
         $data['public'] = !isset($data['public']) ? 0 : 1;
 
         $data['slug'] = Str::slug($data['title'], '-');
